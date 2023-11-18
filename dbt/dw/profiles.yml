@@ -1,0 +1,15 @@
+default:
+  outputs:
+
+    dev:
+      type: postgres
+      host: 8.134.150.225
+      user: datadev
+      password: datadev331
+      port: 15432
+      dbname: sfydw_dev
+      schema: stg
+      threads: 6
+
+  target: dev
+

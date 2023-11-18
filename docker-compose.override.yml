@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  scheduler:
+    volumes:
+      - ./dbt:/usr/local/airflow/dbt
+      - ./plugins:/usr/local/airflow/plugins
+  webserver:
+    volumes:
+      - ./dbt:/usr/local/airflow/dbt
+      - ./plugins:/usr/local/airflow/plugins
+    ports:
+      - "18080:8080"  
+  triggerer:
+    volumes:
+      - ./dbt:/usr/local/airflow/dbt
+      - ./plugins:/usr/local/airflow/plugins      -
