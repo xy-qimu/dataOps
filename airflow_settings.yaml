@@ -1,0 +1,32 @@
+# This file allows you to configure Airflow Connections, Pools, and Variables in a single place for local development only.
+# NOTE: json dicts can be added to the conn_extra field as yaml key value pairs. See the example below.
+
+# For more information, refer to our docs: https://docs.astronomer.io/develop-project#configure-airflow_settingsyaml-local-development-only
+# For questions, reach out to: https://support.astronomer.io
+# For issues create an issue ticket here: https://github.com/astronomer/astro-cli/issues
+
+airflow:
+  connections: 
+    - conn_id: conn_airbyte
+      conn_type: airbyte
+      conn_host: 172.21.125.249
+      conn_schema: 
+      conn_login: airbyte
+      conn_password: oifwf80242w23
+      conn_port: 8000
+      conn_extra:
+    - conn_id: conn_wechat
+      conn_type: http
+      conn_host: https://qyapi.weixin.qq.com
+      conn_schema:
+      conn_login:
+      conn_password: f7ae701d-7077-4284-b577-dc5f93ca1e38
+      conn_port:
+      conn_extra:
+  pools: 
+    - pool_name: my_pool
+      pool_slot: 8
+      pool_description:
+  variables: 
+    - variable_name: my_variable
+      variable_value: my_value
