@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
  @功能描述: Run a dbt Core project as a task group with Cosmos
- @创建人:  tik
+ @创建人:  tik.xie
  @创建日期: 2023-10-28
 """
 from airflow import DAG
@@ -98,7 +98,7 @@ def retry_callback(context):
     ).execute(context)
 
 dag_args = {
-    "owner": "sfy",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
+    "owner": "dw",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
     "retries": 2,  # If a task fails, it will retry 3 times.
     "retry_delay": duration(minutes=3),  # A task that fails will wait 3 minutes to retry.
     "execution_timeout": duration(minutes=100),
@@ -112,8 +112,8 @@ dag_args = {
 }
 
 with DAG(
-    dag_id="sfy-dw",
-    start_date=local_tz.convert(datetime(2023, 11, 7, 9, 0)),
+    dag_id="dataOps",
+    start_date=datetime(2023, 11, 11, 9, 0, tz=local_tz),
     schedule_interval="0 1 * * *",
     catchup=False,
     max_active_runs=1,

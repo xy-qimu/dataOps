@@ -24,7 +24,7 @@ airflow:
       conn_port:
       conn_extra:
   pools: 
-    - pool_name: my_pool
+    - pool_name: dw_pool
       pool_slot: 8
       pool_description:
   variables: 
