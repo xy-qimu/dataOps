@@ -3,11 +3,11 @@ default:
 
     dev:
       type: postgres
-      host: 8.134.150.225
-      user: datadev
-      password: datadev331
+      host: 127.0.0.1
+      user: postgres
+      password: Uhj567;134
       port: 15432
-      dbname: sfydw_dev
+      dbname: postgres
       schema: stg
       threads: 6
 
