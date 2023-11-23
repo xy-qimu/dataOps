@@ -3,13 +3,23 @@ default:
 
     dev:
       type: postgres
-      host: 127.0.0.1
+      host: 192.168.31.243
       user: postgres
       password: Uhj567;134
       port: 15432
-      dbname: postgres
+      dbname: dw_dev
       schema: stg
       threads: 6
 
-  target: dev
+    prod:
+      type: postgres
+      host: 192.168.31.243
+      user: postgres
+      password: Uhj567;134
+      port: 15432
+      dbname: dw
+      schema: stg
+      threads: 6
+
+  target: "{{ env_var('DbtEnv', 'dev') }}"
 

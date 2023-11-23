@@ -23,7 +23,7 @@ local_tz = timezone("Asia/Shanghai")
 # vJobRun = Variable.get("v_kettle_job_run")
 # vEmail = Variable.get("v_email")
 
-vETLDate = '{{ next_ds }}'   # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
+ETL_Date = '{{ next_ds }}'   # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
 
 dag_args = {
     "owner": "dw",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
@@ -61,7 +61,7 @@ with DAG(
         project_config = dbt.project_cfg
         , profile_config = dbt.profile_cfg
         , execution_config = dbt.execution_cfg
-        , operator_args={"vars": {"etl_date": vETLDate}}
+        , operator_args={"vars": {"etl_date": ETL_Date}}
     )
 
     task_end = EmptyOperator(task_id="DW-End", on_success_callback = success_callback)
