@@ -15,9 +15,7 @@ from airflow.operators.empty import EmptyOperator
 from airflow.macros import ds_add, ds_format, timedelta
 from airflow.providers.airbyte.operators.airbyte import AirbyteTriggerSyncOperator
 
-
 local_tz = timezone("Asia/Shanghai")
-
 
 #-------  Variable definitions  ------------------------------------------------
 
@@ -26,10 +24,6 @@ local_tz = timezone("Asia/Shanghai")
 # vEmail = Variable.get("v_email")
 
 vETLDate = '{{ next_ds }}'   # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
-
-vAirb_Airflow_Conn = 'conn_airbyte'         # Airflow connection
-vK3_Airbyte_Conn_ID = '66031d5a-f729-4513-9088-ee6eee255f08'   # airbyte connection id
-
 
 dag_args = {
     "owner": "dw",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
@@ -58,8 +52,8 @@ with DAG(
 
     trigger_k3_airbyte_sync = AirbyteTriggerSyncOperator(
         task_id= 'k3_trigger_sync'
-        , airbyte_conn_id= vAirb_Airflow_Conn
-        , connection_id= vK3_Airbyte_Conn_ID
+        , airbyte_conn_id= 'conn_airbyte'         # Airflow connection
+        , connection_id= '66031d5a-f729-4513-9088-ee6eee255f08'   # airbyte connection id
 
     )
 
