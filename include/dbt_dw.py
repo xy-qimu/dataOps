@@ -1,5 +1,11 @@
+import os
 from pathlib import Path
 from cosmos import ProjectConfig, ProfileConfig, ExecutionConfig
+from dotenv import load_dotenv
+
+load_dotenv()
+
+target_name = os.getenv('DBT_ENV')
 
 dbt_project_path = Path("/usr/local/airflow/dbt/dw")
 dbt_executable = Path("/usr/local/airflow/dbt_venv/bin/dbt")
@@ -10,7 +16,7 @@ execution_cfg = ExecutionConfig(dbt_executable_path=str(dbt_executable))
 
 profile_cfg = ProfileConfig(
     profile_name="default",
-    target_name="dev",
+    target_name=target_name,
     profiles_yml_filepath=dbt_project_path / "profiles.yml",
     )
 

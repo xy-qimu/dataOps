@@ -21,5 +21,5 @@ default:
       schema: stg
       threads: 6
 
-  target: "{{ env_var('DbtEnv', 'dev') }}"
+  target: dev
 

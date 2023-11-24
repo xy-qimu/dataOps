@@ -3,3 +3,5 @@ apache-airflow-providers-airbyte
 astronomer-cosmos
 dbt-postgres
 pendulum
+python-dotenv
+astro-run-dag # This package is needed for the astro run command. It will be removed before a deploy
