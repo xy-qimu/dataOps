@@ -27,7 +27,8 @@ Project Contents
 
 ![img_1.png](res/img2.png)
 
-3、部署生产步骤流程：  
-1）整个项目打包部署到服务器  
-2）修改.env文件内容：把DBT_ENV的值改为prod  
-3）启动项目： astro dev start --env .env  (如是默认的.env文件，也可不用加 --env指定环境变量文件)
+3、项目部署流程：  
+1）从GitHub上pull项目到本地  
+2）在本地项目根目录上创建虚拟环境dbt_venv,并安装项目依赖：pip install -r requirements.txt
+3）如部署到生产环境，修改.env文件内容：DW_ENV=prod  
+4）启动项目： astro dev start [--env .env] (如是默认的.env文件，也可不用加 --env指定环境变量文件)

@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-target_name = os.getenv('DBT_ENV')
+target_name = os.getenv('DW_ENV')
 
 dbt_project_path = Path("/usr/local/airflow/dbt/dw")
 dbt_executable = Path("/usr/local/airflow/dbt_venv/bin/dbt")
