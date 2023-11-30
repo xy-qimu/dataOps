@@ -17,13 +17,13 @@ from airflow.providers.airbyte.operators.airbyte import AirbyteTriggerSyncOperat
 
 local_tz = timezone("Asia/Shanghai")
 
-#-------  Variable definitions  ------------------------------------------------
+# -------  Variable definitions  ------------------------------------------------
 
 # get variable
 # vJobRun = Variable.get("v_kettle_job_run")
 # vEmail = Variable.get("v_email")
 
-ETL_Date = '{{ next_ds }}'   # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
+ETL_Date = '{{ next_ds }}'  # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
 
 dag_args = {
     "owner": "dw",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
@@ -40,31 +40,30 @@ dag_args = {
 }
 
 with DAG(
-    dag_id="dataOps",
-    start_date=datetime(2023, 11, 11, 9, 0, tz=local_tz),
-    schedule_interval="0 1 * * *",
-    catchup=False,
-    max_active_runs=1,
-    default_args=dag_args
+        dag_id="dataOps",
+        start_date=datetime(2023, 11, 11, 9, 0, tz=local_tz),
+        schedule_interval="0 1 * * *",
+        catchup=False,
+        max_active_runs=1,
+        default_args=dag_args
 
 ):
-    task_start = EmptyOperator(task_id="DW-Start")
+    dw_start = EmptyOperator(task_id="DW-Start")
 
     trigger_k3_airbyte_sync = AirbyteTriggerSyncOperator(
-        task_id= 'k3_trigger_sync'
-        , airbyte_conn_id= 'conn_airbyte'         # Airflow connection
-        , connection_id= '66031d5a-f729-4513-9088-ee6eee255f08'   # airbyte connection id
+        task_id='k3_trigger_sync'
+        , airbyte_conn_id='conn_airbyte'  # Airflow connection
+        , connection_id='66031d5a-f729-4513-9088-ee6eee255f08'  # airbyte connection id
 
     )
 
     dbt_tasks = DbtTaskGroup(
-        project_config = dbt.project_cfg
-        , profile_config = dbt.profile_cfg
-        , execution_config = dbt.execution_cfg
+        project_config=dbt.project_cfg
+        , profile_config=dbt.profile_cfg
+        , execution_config=dbt.execution_cfg
         , operator_args={"vars": {"etl_date": ETL_Date}}
     )
 
-    task_end = EmptyOperator(task_id="DW-End", on_success_callback = success_callback)
+    dw_end = EmptyOperator(task_id="DW-End", on_success_callback=success_callback)
 
-
-    task_start >> trigger_k3_airbyte_sync >> dbt_tasks >> task_end
+    dw_start >> trigger_k3_airbyte_sync >> dbt_tasks >> dw_end
