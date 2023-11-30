@@ -32,7 +32,8 @@ Project Contents
         8) jenkins: CICD平台
         
 
-### <font color=red>3、项目部署流程：</font>     [详见安装部署记录](./安装部署记录.md) 
+### <font color=red>3、项目部署流程：</font>     [详见安装部署记录](./安装部署记录.md)   
+(部署前请先在本地安装：<font color=red>python / docker / astro</font>)  
 1）从GitHub上pull项目到本地  
 2）在本地项目根目录上创建虚拟环境dbt_venv,并安装项目依赖：<font color=red>pip install -r requirements.txt</font>   
 3）如部署到生产环境，修改.env文件内容：<font color=red>DW_ENV=prod</font>     
