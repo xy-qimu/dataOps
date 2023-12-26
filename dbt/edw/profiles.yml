@@ -7,7 +7,7 @@ default:
       user: postgres
       password: Uhj567;134
       port: 15432
-      dbname: dw_dev
+      dbname: edw_dev
       schema: stg
       threads: 6
 
@@ -17,7 +17,7 @@ default:
       user: postgres
       password: Uhj567;134
       port: 15432
-      dbname: dw
+      dbname: edw
       schema: stg
       threads: 6
 

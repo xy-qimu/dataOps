@@ -4,7 +4,7 @@
  @创建人:  tik.xie
  @创建日期: 2023-10-28
 """
-import include.dbt_dw as dbt
+import include.dbt_edw as dbt
 from pendulum import datetime, duration, timezone
 from cosmos import DbtTaskGroup
 from include.dag_callback import failure_callback, success_callback, retry_callback
@@ -26,7 +26,7 @@ local_tz = timezone("Asia/Shanghai")
 ETL_Date = '{{ next_ds }}'  # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
 
 dag_args = {
-    "owner": "dw",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
+    "owner": "tik",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
     "retries": 2,  # If a task fails, it will retry 3 times.
     "retry_delay": duration(minutes=3),  # A task that fails will wait 3 minutes to retry.
     "execution_timeout": duration(minutes=100),
@@ -48,7 +48,7 @@ with DAG(
         default_args=dag_args
 
 ):
-    dw_start = EmptyOperator(task_id="DW-Start")
+    _start = EmptyOperator(task_id="ETL-Start")
 
     trigger_k3_airbyte_sync = AirbyteTriggerSyncOperator(
         task_id='k3_trigger_sync'
@@ -64,6 +64,6 @@ with DAG(
         , operator_args={"vars": {"etl_date": ETL_Date}}
     )
 
-    dw_end = EmptyOperator(task_id="DW-End", on_success_callback=success_callback)
+    _end = EmptyOperator(task_id="ETL-End", on_success_callback=success_callback)
 
-    dw_start >> trigger_k3_airbyte_sync >> dbt_tasks >> dw_end
+    _start >> trigger_k3_airbyte_sync >> dbt_tasks >> _end

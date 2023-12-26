@@ -9,10 +9,10 @@ airflow:
   connections: 
     - conn_id: conn_airbyte
       conn_type: airbyte
-      conn_host: 172.21.125.249
+      conn_host: localhost
       conn_schema: 
       conn_login: airbyte
-      conn_password: oifwf80242w23
+      conn_password: oi80242w23
       conn_port: 8000
       conn_extra:
     - conn_id: conn_wechat
@@ -20,11 +20,11 @@ airflow:
       conn_host: https://qyapi.weixin.qq.com
       conn_schema:
       conn_login:
-      conn_password: f7ae701d-7077-4284-b577-dc5f93ca1e38
+      conn_password: f7ae701f-6077-3285-b577-dc5f93ca1e39
       conn_port:
       conn_extra:
   pools: 
-    - pool_name: dw_pool
+    - pool_name: airflow_pool
       pool_slot: 8
       pool_description:
   variables: 

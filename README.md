@@ -3,9 +3,8 @@ Overview
 
 本项目的定位是通过研发一套成熟稳定的现代数据仓库平台，并构建自动化的数据更新管道，为公司的各项生产经营活动提供高质量的数据支撑，从而达到降本增效的目标。
 
-涉及的业务模块：采购、销售、生产、库存及财务等
-
-涉及的业务系统：SAP、POS及CRM等
++ 业务模块：采购、销售、生产、库存及财务等
++ 业务系统：SAP、POS及CRM等
 
 <font color=red size=5>项目亮点：</font> 
 通过落地DataOps，提升了数据团队的开发运维效率，从而更好地为业务提供更高质量更稳定的数据服务。
@@ -33,8 +32,12 @@ Project Contents
         
 
 ### <font color=red>3、项目部署流程：</font>     
-(部署前请先在本地安装：<font color=red>python / docker / astro</font>    [详见安装部署记录](./安装部署记录.md))  
-1）从GitHub上pull项目到本地  
-2）在本地项目根目录上创建虚拟环境dbt_venv,并安装项目依赖：<font color=red>pip install -r requirements.txt</font>   
-3）如部署到生产环境，修改.env文件内容：<font color=red>DW_ENV=prod</font>     
-4）启动项目： <font color=red>astro dev start</font>  [--env .env]  (默认的.env文件，可不用加 --env指定环境变量文件)
+
+1）在本地环境先安装工具软件：<font color=red>python / docker / astro</font>    [详见安装部署记录](./安装部署记录.md)  ， 并预先创建`postgresql`数据库`edw_dev`(schema无需手工创建, dbt会根据配置自动创建)  
+2）从GitHub上`pull`项目代码到本地  
+3）在本地项目根目录上创建虚拟环境 `venv`，激活`venv`环境并安装项目依赖：<font color=red>pip install -r requirements.txt</font>    
+4）启动`astro`项目： <font color=red>astro dev start</font>  (若需指定环境变量文件，可在命令后面添加 `--env .env`)  
+
+<font color=red>注：</font> 
++ `astro` 项目启动时，会把`requirements.txt`文件里的依赖安装到docker容器中，并把整个项目映射到docker容器的`/usr/local/airflow/`目录下
++ 代码部署到生产环境时，需记得修改`.env`环境变量文件内容为：<font color=red>EDW_ENV=prod</font>
