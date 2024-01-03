@@ -2,7 +2,9 @@ dags
 include
 plugins
 res
+tests
 venv
-target
-dbt_packages
+dbt/edw/target
+dbt/edw/dbt_packages
 dbt/edw/macros
+dbt/edw/logs
