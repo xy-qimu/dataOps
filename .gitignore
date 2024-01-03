@@ -1,0 +1,4 @@
+/dbt/edw/target/
+/dbt/edw/logs/
+/logs/
+.idea/
