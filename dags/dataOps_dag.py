@@ -23,6 +23,9 @@ local_tz = timezone("Asia/Shanghai")
 # vJobRun = Variable.get("v_kettle_job_run")
 # vEmail = Variable.get("v_email")
 
+airflow_conn_id_airbyte = "conn_airbyte"  # Airflow connection
+airbyte_connection_id = "66031d5a-f729-4513-9088-ee6eee255f08"  # airbyte connection id
+
 ETL_Date = "{{ next_ds }}"  # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
 
 dag_args = {
@@ -38,7 +41,7 @@ dag_args = {
     "on_failure_callback": failure_callback,
     # 'on_success_callback': success_callback,
     "on_retry_callback": retry_callback,
-    # "pool": 'dw_pool',
+    # "pool": 'airflow_pool',
 }
 
 with DAG(
@@ -51,19 +54,23 @@ with DAG(
 ):
     _start = EmptyOperator(task_id="ETL-Start")
 
-    trigger_k3_airbyte_sync = AirbyteTriggerSyncOperator(
-        task_id="k3_trigger_sync",
-        airbyte_conn_id="conn_airbyte",  # Airflow connection
-        connection_id="66031d5a-f729-4513-9088-ee6eee255f08",  # airbyte connection id
+    trigger_pos_airbyte_sync = AirbyteTriggerSyncOperator(
+        task_id="pos_trigger_sync",
+        airbyte_conn_id=airflow_conn_id_airbyte,  # Airflow connection
+        connection_id=airbyte_connection_id,  # airbyte connection id
     )
 
     dbt_tasks = DbtTaskGroup(
         project_config=dbt.project_cfg,
         profile_config=dbt.profile_cfg,
         execution_config=dbt.execution_cfg,
-        operator_args={"vars": {"etl_date": ETL_Date}},
+        operator_args={
+            "vars": {"etl_date": ETL_Date},  # etl_date is a dbt variable
+            "install_deps": True,  # install any necessary dependencies before running any dbt command
+            "full_refresh": True,  # used only in dbt commands that support this flag
+        },
     )
 
     _end = EmptyOperator(task_id="ETL-End", on_success_callback=success_callback)
 
-    _start >> trigger_k3_airbyte_sync >> dbt_tasks >> _end
+    _start >> trigger_pos_airbyte_sync >> dbt_tasks >> _end

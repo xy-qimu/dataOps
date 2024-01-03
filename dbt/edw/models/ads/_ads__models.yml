@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: ads_model3
+    config:
+      materialized: table
+    columns:
+      - name: cid
+        tests:
+          - not_null
+          - unique
