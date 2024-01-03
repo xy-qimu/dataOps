@@ -3,21 +3,23 @@ from airflow.utils.decorators import apply_defaults
 
 from wechat_hook import WechatHook
 
+
 class WechatOperator(BaseOperator):
+    template_fields = ("message",)
 
-    template_fields = ('message',)
-
-    ui_color = '#4ea4d4'  # Wechat icon color
+    ui_color = "#4ea4d4"  # Wechat icon color
 
     @apply_defaults
-    def __init__(self,
-                 wechat_conn_id='conn_wechat',
-                 message_type='text',
-                 message=None,
-                 at_mobiles=None,
-                 at_all=False,
-                 *args,
-                 **kwargs):
+    def __init__(
+        self,
+        wechat_conn_id="conn_wechat",
+        message_type="text",
+        message=None,
+        at_mobiles=None,
+        at_all=False,
+        *args,
+        **kwargs
+    ):
         super(WechatOperator, self).__init__(*args, **kwargs)
         self.wechat_conn_id = wechat_conn_id
         self.message_type = message_type
@@ -26,12 +28,12 @@ class WechatOperator(BaseOperator):
         self.at_all = at_all
 
     def execute(self, context):
-        self.log.info('Sending WeChat message.')
+        self.log.info("Sending WeChat message.")
         hook = WechatHook(
             self.wechat_conn_id,
             self.message_type,
             self.message,
             self.at_mobiles,
-            self.at_all
+            self.at_all,
         )
         hook.send()

@@ -5,8 +5,7 @@
     incremental_strategy='merge'
   )
 }}
-select
-        cid as cid
-        ,'{{ var("etl_date")}}' as cname
-        ,to_char(now(),'yyyy-mm-dd hh24:mi:ss')  as DATA_LOAD_TIME
-from  {{ ref("ods_company")}}
+SELECT
+    cid AS cid,
+    to_char(now(), 'yyyy-mm-dd hh24:mi:ss') AS data_load_time
+FROM {{ ref("ods_company")}}

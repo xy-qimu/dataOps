@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: "3.0.0a4"
+    hooks:
+      - id: sqlfluff-lint
+        additional_dependencies:
+            [ "dbt-postgres==1.7.4", "sqlfluff-templater-dbt==3.0.0a4" ]
+      - id: sqlfluff-fix
+        additional_dependencies:
+            [ "dbt-postgres==1.7.4", "sqlfluff-templater-dbt==3.0.0a4" ]
+  - repo: https://github.com/psf/black
+    rev: "23.12.0"
+    hooks:
+      - id: black

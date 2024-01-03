@@ -4,4 +4,4 @@
   )
 }}
 
-select * from {{ ref("ods_company")}}
+SELECT * FROM {{ ref("ods_company")}}

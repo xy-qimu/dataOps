@@ -1,5 +1,11 @@
-select 1 as cid ,'a company' as cname
-union
-select 2 as cid ,'b company' as cname
-union
-select 3 as cid ,'c company' as cname
+SELECT
+    1 AS cid,
+    'a company' AS cname
+UNION
+SELECT
+    2 AS cid,
+    'b company' AS cname
+UNION
+SELECT
+    3 AS cid,
+    'c company' AS cname

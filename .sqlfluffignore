@@ -1,0 +1,8 @@
+dags
+include
+plugins
+res
+venv
+target
+dbt_packages
+dbt/edw/macros

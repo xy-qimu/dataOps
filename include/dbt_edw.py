@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-target_name = os.getenv('EDW_ENV')
+target_name = os.getenv("EDW_ENV")
 
 dbt_project_path = Path("/usr/local/airflow/dbt/edw")
 dbt_executable = Path("/usr/local/bin/dbt")
@@ -18,6 +18,4 @@ profile_cfg = ProfileConfig(
     profile_name="default",
     target_name=target_name,
     profiles_yml_filepath=dbt_project_path / "profiles.yml",
-    )
-
-
+)
