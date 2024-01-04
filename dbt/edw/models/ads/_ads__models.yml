@@ -5,7 +5,7 @@ models:
     config:
       materialized: table
     columns:
-      - name: cid
+      - name: customer_id
         tests:
           - not_null
           - unique

@@ -1,7 +1,7 @@
--- Example of a pre-hook to truncate a staging table
 {{ config(
-  pre_hook="TRUNCATE TABLE {{ this }}"
+  post_hook="select now()"
 ) }}
+
 
 WITH source AS (
 
