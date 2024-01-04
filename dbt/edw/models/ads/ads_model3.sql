@@ -3,4 +3,4 @@
   pre_hook="TRUNCATE TABLE {{ this }}"
 ) }}
 
-SELECT * FROM {{ ref("ods_company")}}
+SELECT * FROM {{ ref("ods_customers")}}

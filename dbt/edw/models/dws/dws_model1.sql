@@ -4,7 +4,5 @@
   )
 }}
 
-SELECT
-    cid AS cid,
-    cname AS cname
-FROM {{ ref("ods_company") }}
+SELECT *
+FROM {{ ref("ods_customers") }}
