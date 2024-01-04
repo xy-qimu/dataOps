@@ -5,7 +5,6 @@
     incremental_strategy='merge'
   )
 }}
-SELECT
-    cid AS cid,
-    to_char(now(), 'yyyy-mm-dd hh24:mi:ss') AS data_load_time
-FROM {{ ref("ods_company")}}
+
+SELECT *
+FROM {{ ref("ods_customers") }}
