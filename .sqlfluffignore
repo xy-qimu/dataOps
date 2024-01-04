@@ -7,4 +7,6 @@ venv
 dbt/edw/target
 dbt/edw/dbt_packages
 dbt/edw/macros
+dbt/edw/seeds
+dbt/edw/snapshots
 dbt/edw/logs
