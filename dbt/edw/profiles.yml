@@ -8,7 +8,7 @@ default:
       password: Uhj567;134
       port: 15432
       dbname: edw_dev
-      schema: stg
+      schema: raw
       threads: 6
 
     prod:
@@ -18,7 +18,7 @@ default:
       password: Uhj567;134
       port: 15432
       dbname: edw
-      schema: stg
+      schema: raw
       threads: 6
 
   target: dev

@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: pos
+    database: |
+      {%- if  target.name == "dev" -%} edw_dev
+      {%- else -%} edw
+      {%- endif -%}
+    schema: raw
+    tables:
+      - name: raw_orders
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+      - name: raw_customers
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
