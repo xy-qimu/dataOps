@@ -18,7 +18,7 @@ renamed AS (
     SELECT
         id AS order_id,
         user_id AS customer_id,
-        order_date,
+        order_date::varchar,
         status
 
     FROM source

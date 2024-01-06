@@ -2,19 +2,26 @@ version: 2
 
 models:
   - name: stg_customers
+    description: 客户基本信息表
     columns:
       - name: customer_id
+        description: 客户ID
         tests:
           - unique
           - not_null
 
   - name: stg_orders
+    description: 订单信息表
     columns:
       - name: order_id
+        description: 订单ID
         tests:
           - unique
           - not_null
+      - name: customer_id
+        description: 客户ID
       - name: status
+        description: 订单状态
         tests:
           - accepted_values:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
