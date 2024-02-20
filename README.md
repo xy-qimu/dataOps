@@ -36,7 +36,8 @@ Project Contents
 1）在本地环境先安装工具软件：<font color=red>python / docker / astro</font>    [详见安装部署记录](./安装部署记录.md)  ， 并预先创建`postgresql`数据库`edw_dev`(schema无需手工创建, dbt会根据配置自动创建)  
 2）从GitHub上`pull`项目代码到本地  
 3）在本地项目根目录上创建虚拟环境 `venv`，激活`venv`环境并安装项目依赖：<font color=red>pip install -r requirements.txt</font>    
-4）启动`astro`项目： <font color=red>astro dev start</font>  (若需指定环境变量文件，可在命令后面添加 `--env .env`)  
+4）执行`pre-commit`安装： <font color=red>pre-commit install</font>（执行完毕后，以后在commit代码前会根据git hooks程序检查代码）  
+5）启动`astro`项目： <font color=red>astro dev start</font>  (若需指定环境变量文件，可在命令后面添加 `--env .env`)  
 
 <font color=red>注：</font> 
 + `astro` 项目启动时，会把`requirements.txt`文件里的依赖安装到docker容器中，并把整个项目映射到docker容器的`/usr/local/airflow/`目录下

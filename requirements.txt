@@ -5,5 +5,3 @@ pendulum
 python-dotenv
 apache-airflow-providers-airbyte
 pre-commit
-sqlfluff
-sqlfluff-templater-dbt
