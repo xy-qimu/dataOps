@@ -3,5 +3,6 @@ dbt-postgres
 astronomer-cosmos
 pendulum
 python-dotenv
+apache-airflow
 apache-airflow-providers-airbyte
 pre-commit
