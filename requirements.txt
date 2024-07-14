@@ -7,3 +7,5 @@ python-dotenv
 apache-airflow
 apache-airflow-providers-airbyte
 pre-commit
+pandas
+sqlalchemy
