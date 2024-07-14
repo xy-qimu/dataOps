@@ -1,0 +1,4 @@
+gcc
+g++
+unixodbc
+unixodbc-dev
