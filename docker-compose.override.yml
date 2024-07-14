@@ -5,13 +5,16 @@ services:
     volumes:
       - ./dbt:/usr/local/airflow/dbt
       - ./plugins:/usr/local/airflow/plugins
+      - ./include:/usr/local/airflow/include
   webserver:
     volumes:
       - ./dbt:/usr/local/airflow/dbt
       - ./plugins:/usr/local/airflow/plugins
+      - ./include:/usr/local/airflow/include
     ports:
       - "18080:8080"  
   triggerer:
     volumes:
       - ./dbt:/usr/local/airflow/dbt
-      - ./plugins:/usr/local/airflow/plugins      -
+      - ./plugins:/usr/local/airflow/plugins
+      - ./include:/usr/local/airflow/include
