@@ -7,4 +7,4 @@ sudo apt-get update
 sudo ACCEPT_EULA=Y apt-get install -y msodbcsql17
 
 # optional: for unixODBC development headers
-sudo apt-get install -y unixodbc-dev
+# sudo apt-get install -y unixodbc-dev
