@@ -26,7 +26,7 @@ local_tz = timezone("Asia/Shanghai")
 airflow_conn_id_airbyte = "conn_airbyte"  # Airflow connection
 airbyte_connection_id = "66031d5a-f729-4513-9088-ee6eee255f08"  # airbyte connection id
 
-ETL_Date = "{{ next_ds }}"  # dag 于 2023-11-9 执行，则 etl date 为 2023-11-8
+ETL_Date = "{{ data_interval_start.in_timezone('Asia/Shanghai').strftime('%Y-%m-%d')}}"  # data_interval_start
 
 dag_args = {
     "owner": "tik",  # Defines the value of the "owner" column in the DAG view of the Airflow UI
